@@ -22,7 +22,9 @@ return new class extends Migration
             $table->integer('age');
             $table->text('phone_number');
             $table->enum('type' , ['BLIND' , 'RELATIVE']);
+            $table->foreignId('relative_id')->nullable()->constrained('users')->nullOnDelete()->cascadeOnUpdate();
             $table->string('image')->nullable();
+            $table->string('fcm_token')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
