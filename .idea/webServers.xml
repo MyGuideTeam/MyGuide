@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="6895921c-edb5-4454-84c7-0b8eebbe606f" name="MyGuide" url="http://78.46.48.145">
+        <fileTransfer rootFolder="/public_html/MyGuide" host="78.46.48.145" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

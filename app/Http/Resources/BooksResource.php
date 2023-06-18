@@ -16,10 +16,12 @@ class BooksResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'img' => $this->image,
+            'id' => $this->id,
+            'img' => $this->avatar,
             'name' => $this->title,
             'author'=> $this->author,
-            'publish_year' => Carbon::parse($this->publish_year)->format('Y')
+            'publish_year' => Carbon::parse($this->publish_year)->format('Y'),
+            'audio_file' => $this->audio
         ];
     }
 }

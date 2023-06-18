@@ -64,7 +64,7 @@ class BooksController extends Controller
             if ($request->has('image'))
                 $this->uploadImage($request , 'books/' , $book , 'image');
             if ($request->has('audio_file'))
-                $this->uploadImage($request , 'books/' , $book , 'audio_file');
+                $this->uploadImage($request , 'books/' , $book , 'audio_file' , 'audio_file');
             return to_route('books.index')->with('message' , "Book Updated !");
         }catch (\Exception $e){
             return back()->with('error' , "Something Went Wrong");

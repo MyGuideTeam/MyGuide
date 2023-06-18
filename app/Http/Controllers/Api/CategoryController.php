@@ -13,16 +13,16 @@ class CategoryController extends Controller
 {
     use ApiTrait;
 
-    public function index(){
+    public function index()
+    {
         $categories = BookCategory::all();
-        return $this->responseSuccess(200 , 'Categories Returned Successfully !' , CategoryResource::collection($categories));
+        return $this->responseSuccess(200, 'Categories Returned Successfully !', CategoryResource::collection($categories));
     }
 
 
-    public function getBooks($id){
-        $category = BookCategory::find($id);
+    public function getBooks($id)
+    {
+        $category = BookCategory::findOrFail($id);
         return $this->responseSuccess(200, 'Books Returned Successfully ', BooksResource::collection($category->books));
     }
-
-
 }

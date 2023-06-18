@@ -38,9 +38,18 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+
     public function getAvatarAttribute(){
         if (!$this->image)
             return url('default.png');
         return url('storage/' . $this->image);
+    }
+
+    public function relative(){
+        return $this->belongsTo(User::class , 'relative_id');
+    }
+
+    public function blind(){
+        return $this->hasOne(User::class , 'relative_id');
     }
 }

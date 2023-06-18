@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\BlindRelativeLinkingController;
 use App\Http\Controllers\Api\BooksController;
 use App\Http\Controllers\Api\CategoryController;
 use Illuminate\Http\Request;
@@ -17,12 +18,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::controller(CategoryController::class)->prefix('categories')->group(function (){
+   Route::get('/' , 'index');
+   Route::get('/{id}/books' , 'getBooks');
+});
 
-Route::get('/categories' , [CategoryController::class , 'index']);
+Route::controller(BooksController::class)->prefix('books')->group(function (){
+   Route::get('/{id}' , 'show');
+});
 
-Route::get('categories/{id}/books' , [CategoryController::class , 'getBooks']);
-
-Route::get('books/{id}' , [BooksController::class , 'show']);
 
 Route::controller(AuthController::class)->prefix('auth')->group(function (){
    Route::post('register' , 'register');
@@ -30,5 +34,11 @@ Route::controller(AuthController::class)->prefix('auth')->group(function (){
    Route::post('logout' , 'logout')->middleware('auth:api');
    Route::post('update-profile' , 'updateProfile')->middleware('auth:api');
    Route::get('profile' , 'profile')->middleware('auth:api');
-   Route::post('scan' , 'scanQr')->middleware('auth:api');
+});
+
+Route::controller(BlindRelativeLinkingController::class)->middleware('auth:api')->group(function (){
+    Route::get('linkedProfile' , 'linkedProfile');
+    Route::post('scan' , 'scanQr');
+    Route::post('location' , 'sendLocation');
+
 });

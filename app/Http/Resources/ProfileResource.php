@@ -20,7 +20,7 @@ class ProfileResource extends JsonResource
             'phone_number' => $this->phone_number,
             'age' => $this->age,
             'gender' => $this->gender,
-            'image' => $this->image ? url($this->image) : null,
+            'image' => $this->avatar,
         ];
     }
 }

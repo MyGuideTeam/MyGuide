@@ -15,4 +15,10 @@ class AudioBook extends Model
             return url('default.png');
         return url('storage/' . $this->image);
     }
+
+    public function getAudioAttribute(){
+        if (!$this->audio_file)
+            return null;
+        return url('storage/' . $this->audio_file);
+    }
 }

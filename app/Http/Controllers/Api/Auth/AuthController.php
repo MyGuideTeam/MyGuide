@@ -24,7 +24,7 @@ class AuthController extends Controller
         $token = Auth::guard('api')->attempt($credentials);
         if (!$token) {
             return response()->json([
-                'status' => 'Error',
+                'status' => '422',
                 'message' => 'Wrong Data Please Try Again !',
             ], 401);
         }
@@ -73,25 +73,14 @@ class AuthController extends Controller
 
     public function updateProfile(UpdateProfileRequest $request){
         $user = \auth('api')->user();
-        $user->update([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'phone_number' => $request['phone_number'],
-            'gender' => $request['gender'],
-            'age' => $request['age'],
-        ]);
+        $user->update($request->validated());
         if ($request->has('image')){
-            $this->uploadImage($request , 'users/' , $user , 'image');
+            $this->uploadImage($request , 'users/avatars/' , $user , 'image');
         }
         return $this->responseSuccess(200 , 'Updated' , UserResource::make($user));
     }
 
-    public function scanQr(Request $request){
-        User::find($request['blind_id'])->update([
-            'relative_id' => \auth('api')->user()->id
-        ]);
-        return $this->responseSuccess(200 , 'Scanned !');
-    }
+
 
     public function refresh()
     {
